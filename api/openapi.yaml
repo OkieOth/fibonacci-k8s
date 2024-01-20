@@ -1,0 +1,18 @@
+openapi: 3.0.3
+info:
+  title: REST Interface to get list of fibonacci numbers
+  version: 0.1.0
+servers:
+  - url: http://testserver1.com
+paths:
+  /fibonacci/{number}:
+    get:
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: number
