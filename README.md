@@ -13,3 +13,5 @@ commonn coding languages and puts them into a Kubernetes cluster.
 * Quarkus native: 6 MB
 * Node.js: 9 MB
 * Python: 37 MB
+* Dotnet: 75 MB
+* Quarkus: 105 MB
