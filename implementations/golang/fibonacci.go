@@ -55,6 +55,6 @@ func main() {
 	r.PathPrefix("/docs/").Handler(http.StripPrefix("/docs/", http.FileServer(http.Dir("docs"))))
 
 	// Start the server
-	log.Println("Server listening on :8080...")
-	log.Fatal(http.ListenAndServe(":8080", r))
+	log.Println("Server listening on :5000...")
+	log.Fatal(http.ListenAndServe(":5000", r))
 }

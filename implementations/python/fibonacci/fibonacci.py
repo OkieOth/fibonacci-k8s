@@ -1,6 +1,10 @@
 from flask import Flask, jsonify
 from flask_restful import Api, Resource
 
+import logging
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
 app = Flask(__name__)
 api = Api(app)
 

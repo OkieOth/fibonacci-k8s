@@ -12,6 +12,12 @@ commonn coding languages and puts them into a Kubernetes cluster.
 * Golang: 800k
 * Quarkus native: 6 MB
 * Node.js: 9 MB
-* Python: 37 MB
+* Python: 19,7 MB
 * Dotnet: 75 MB
 * Quarkus: 105 MB
+
+# K6
+For the performance test k6 is used. To play around with the 
+repo it make sense to have it installed
+
+https://k6.io/open-source/

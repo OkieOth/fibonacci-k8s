@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 
 async fn fibonacci_list(Path(steps): Path<String>) -> Result<Json<Vec<u128>>, (StatusCode, String)> {
     let mut result: Vec<u128> = Vec::new();
-    println!("fibonacci_list/{} is called.", steps);
+    //println!("fibonacci_list/{} is called.", steps);
     let steps_num = steps.parse::<u32>().unwrap();
 
 
@@ -37,6 +37,6 @@ async fn main() {
         .route("/fibonacci/:steps", get(fibonacci_list));
 
     // run our app with hyper, listening globally on port 3000
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await.unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:5000").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }
