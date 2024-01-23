@@ -5,6 +5,8 @@ k6 requests for 30"
 # Rust
 
 ## Alpine Image
+
+Imagesize: 19.2 MB
 CPU: max 270%
 Mem: 1.5 MB
 
@@ -34,10 +36,11 @@ Mem: 1.5 MB
      vus_max........................: 10     min=10         max=10
 
 running (0m30.0s), 00/10 VUs, 557046 complete and 0 interrupted iterations
-default ✓ [======================================] 10 VUs  30s
 ```
 
 ## Debian Image
+
+Imagesize: 82.4 MB
 CPU: max 142%
 Mem: 2.2 MB
 
