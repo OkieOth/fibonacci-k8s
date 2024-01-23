@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- didn't work
+    <PublishAot>true</PublishAot>
+    -->
   </PropertyGroup>
 
   <ItemGroup>

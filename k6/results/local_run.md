@@ -1,5 +1,7 @@
 # TL;DR;
 
+k6 requests for 30"
+
 | Language         | Runs    | Memory  |
 | ---------------- | ------- | ------- |
 | Python           | 37241   | 19 MB   |
@@ -72,6 +74,10 @@ running (0m30.0s), 00/10 VUs, 37241 complete and 0 interrupted iterations
 
 # csharp
 
+## Native Publish
+The native build was successful, but created runtime errors while handling the requests
+
+## Normal version
 Memory consumption after execution: 80.6 MB
 
 ```
