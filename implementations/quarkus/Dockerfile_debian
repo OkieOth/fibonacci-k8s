@@ -1,0 +1,19 @@
+FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 AS build
+COPY --chown=quarkus:quarkus fibonacci/mvnw /code/mvnw
+COPY --chown=quarkus:quarkus fibonacci/.mvn /code/.mvn
+COPY --chown=quarkus:quarkus fibonacci/pom.xml /code/
+USER quarkus
+WORKDIR /code
+RUN ./mvnw -B org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline
+COPY fibonacci/src /code/src
+RUN ./mvnw package -Dnative
+
+FROM debian:bookworm-slim
+
+WORKDIR /usr/src/app
+
+COPY --from=build /code/target/fibonacci-1.0.0-SNAPSHOT-runner ./fibonacci
+
+EXPOSE 5000
+
+CMD ["./fibonacci"]

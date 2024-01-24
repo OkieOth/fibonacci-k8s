@@ -1,0 +1,20 @@
+FROM quay.io/quarkus/ubi-quarkus-mandrel-builder-image:jdk-21 AS build
+COPY --chown=quarkus:quarkus fibonacci/mvnw /code/mvnw
+COPY --chown=quarkus:quarkus fibonacci/.mvn /code/.mvn
+COPY --chown=quarkus:quarkus fibonacci/pom.xml /code/
+USER quarkus
+WORKDIR /code
+RUN ./mvnw -B org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline
+COPY fibonacci/src /code/src
+RUN ./mvnw package -Dnative
+
+FROM quay.io/quarkus/quarkus-micro-image:2.0
+WORKDIR /app/
+
+# set up permissions for user `1001`
+COPY --from=build --chown=1001:root --chmod="g+rwX" /code/target/*-runner /app/fibonacci
+
+EXPOSE 5000
+USER 1001
+
+CMD ["./fibonacci", "-Dquarkus.http.host=0.0.0.0"]

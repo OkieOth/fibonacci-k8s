@@ -4,7 +4,7 @@ k6 requests for 30"
 
 | Language         | Runs    | Memory  |
 | ---------------- | ------- | ------- |
-| Python           | 37241   | 19 MB   |
+| Python           | 39736   | 19 MB   |
 | Dotnet           | 1026353 | 80 MB   |
 | Node             | 146636  | 12 MB   |
 | Quarkus          | 1000729 | 500 MB? |
@@ -21,25 +21,25 @@ Memory: 19.7 MB
            * default: 10 looping VUs for 30s (gracefulStop: 30s)
 
 
-     data_received..................: 42 MB  1.4 MB/s
-     data_sent......................: 3.0 MB 99 kB/s
-     http_req_blocked...............: avg=120.06µs min=80.22µs med=115.32µs max=6.82ms   p(90)=142.36µs p(95)=156.15µs
-     http_req_connecting............: avg=82.06µs  min=53.91µs med=78.74µs  max=6.76ms   p(90)=96.76µs  p(95)=106.81µs
-     http_req_duration..............: avg=9.23ms   min=1.47ms  med=9.06ms   max=27.33ms  p(90)=10.4ms   p(95)=10.97ms
-       { expected_response:true }...: avg=9.23ms   min=1.47ms  med=9.06ms   max=27.33ms  p(90)=10.4ms   p(95)=10.97ms
-     http_req_failed................: 0.00%  ✓ 0           ✗ 31891
-     http_req_receiving.............: avg=323.87µs min=25.5µs  med=151.83µs max=13.77ms  p(90)=824.34µs p(95)=958.34µs
-     http_req_sending...............: avg=20.53µs  min=11.6µs  med=19.42µs  max=443.77µs p(90)=25.61µs  p(95)=28.9µs
+     data_received..................: 7.0 MB 233 kB/s
+     data_sent......................: 3.7 MB 123 kB/s
+     http_req_blocked...............: avg=114.59µs min=79.28µs med=111.09µs max=3.56ms   p(90)=131.84µs p(95)=144.06µs
+     http_req_connecting............: avg=79.59µs  min=54.29µs med=76.68µs  max=3.28ms   p(90)=92.26µs  p(95)=103.68µs
+     http_req_duration..............: avg=7.38ms   min=1.11ms  med=7.23ms   max=24.12ms  p(90)=7.96ms   p(95)=8.28ms
+       { expected_response:true }...: avg=7.38ms   min=1.11ms  med=7.23ms   max=24.12ms  p(90)=7.96ms   p(95)=8.28ms
+     http_req_failed................: 0.00%  ✓ 0           ✗ 39736
+     http_req_receiving.............: avg=191.3µs  min=24.97µs med=95.69µs  max=14.52ms  p(90)=604.89µs p(95)=709.08µs
+     http_req_sending...............: avg=19.69µs  min=10.34µs med=18.83µs  max=399.17µs p(90)=23.82µs  p(95)=26.24µs
      http_req_tls_handshaking.......: avg=0s       min=0s      med=0s       max=0s       p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=8.89ms   min=1.33ms  med=8.75ms   max=27.03ms  p(90)=9.9ms    p(95)=10.43ms
-     http_reqs......................: 31891  1062.749686/s
-     iteration_duration.............: avg=9.39ms   min=2ms     med=9.22ms   max=27.49ms  p(90)=10.56ms  p(95)=11.14ms
-     iterations.....................: 31891  1062.749686/s
+     http_req_waiting...............: avg=7.17ms   min=1ms     med=7.07ms   max=23.54ms  p(90)=7.62ms   p(95)=7.89ms
+     http_reqs......................: 39736  1324.216614/s
+     iteration_duration.............: avg=7.54ms   min=1.75ms  med=7.38ms   max=24.36ms  p(90)=8.12ms   p(95)=8.43ms
+     iterations.....................: 39736  1324.216614/s
      vus............................: 10     min=10        max=10
      vus_max........................: 10     min=10        max=10
 
 
-running (0m30.0s), 00/10 VUs, 31891 complete and 0 interrupted iterations
+running (0m30.0s), 00/10 VUs, 39736 complete and 0 interrupted iterations
 ```
 
 ## Logging turned off

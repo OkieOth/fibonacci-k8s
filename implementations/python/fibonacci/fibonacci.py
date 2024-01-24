@@ -26,4 +26,4 @@ def calculate_fibonacci(n):
 api.add_resource(FibonacciResource, '/fibonacci/<number>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
