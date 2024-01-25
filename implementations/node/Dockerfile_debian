@@ -1,0 +1,12 @@
+FROM node:21-bookworm-slim
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN npm install
+
+EXPOSE 5000
+
+CMD ["node", "fibonacci.js"]
+

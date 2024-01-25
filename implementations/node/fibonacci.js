@@ -31,17 +31,7 @@ app.get('/fibonacci/:number', (req, res) => {
   return res.json(result);
 });
 
-
-// app.get('/test', (req, res) => {
-//     res.send("test");
-//   });
-  
-
-// app.get('/', (req, res) => {
-// res.send('Hello World!')
-// })
-
 // Start the server
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

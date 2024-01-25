@@ -1,22 +1,14 @@
-FROM rust:latest as build
+FROM python:alpine
 
 WORKDIR /usr/src/app
 
 COPY . .
 
-RUN rustup target add x86_64-unknown-linux-musl
+RUN pip install -r requirements.txt
 
-RUN cargo build --release --target=x86_64-unknown-linux-musl
-
-FROM alpine:latest
-
-WORKDIR /usr/src/app
-
-RUN apk update \
-    && apk add --no-cache ca-certificates tzdata libgcc
-
-COPY --from=build /usr/src/app/target/x86_64-unknown-linux-musl/release/fibonacci .
+ENV FLASK_APP=fibonacci.py
 
 EXPOSE 5000
 
-CMD ["./fibonacci"]
+CMD ["python", "-m", "flask", "run", "--host=0.0.0.0"]
+
