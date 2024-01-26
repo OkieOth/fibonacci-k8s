@@ -2,13 +2,92 @@
 
 k6 requests for 30"
 
+| Language       | Image      | Size   | Mem    | CPU   | Iterations |
+| -------------- | ---------- | ------ | ------ | ----- | ---------- |
+| Quarkus native | minimal    | 78 MB  | 25 MB  | 310 % | 561190     |
+| c#             | asp.net8.0 | 225 MB | 94 MB  | 210 % | 694299     |
+| Node           | Apline     | 147 MB | 50 MB  | 110 % | 173073     |
+|                | Debian     | 211 MB | 68 MB  | 110%  | 178769     |
+| Golang         | Apline     | 15 MB  | 8 MB   | 240 % | 644713     |
+|                | Debian     | 82 MB  | 8.5 MB | 240 % | 622670     |
+
+
+
+
+# Golang
+
+The Golang images release memory in a good way ...
+
+## Debian Image
+
+Imagesize: 82 MB
+CPU: max 240%
+Mem: 8.5 MB
+
+```
+  scenarios: (100.00%) 1 scenario, 10 max VUs, 1m0s max duration (incl. graceful stop):
+           * default: 10 looping VUs for 30s (gracefulStop: 30s)
+
+
+     data_received..................: 783 MB 26 MB/s
+     data_sent......................: 58 MB  1.9 MB/s
+     http_req_blocked...............: avg=2.16µs   min=662ns   med=2.19µs   max=1.66ms   p(90)=2.68µs   p(95)=2.89µs
+     http_req_connecting............: avg=5ns      min=0s      med=0s       max=478.66µs p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=426.09µs min=77.69µs med=385.5µs  max=7.66ms   p(90)=639.96µs p(95)=739.29µs
+       { expected_response:true }...: avg=426.09µs min=77.69µs med=385.5µs  max=7.66ms   p(90)=639.96µs p(95)=739.29µs
+     http_req_failed................: 0.00%  ✓ 0            ✗ 622670
+     http_req_receiving.............: avg=25.69µs  min=6.61µs  med=23.99µs  max=6.44ms   p(90)=33.46µs  p(95)=38.09µs
+     http_req_sending...............: avg=9.14µs   min=2.98µs  med=9.33µs   max=5.76ms   p(90)=11.21µs  p(95)=11.87µs
+     http_req_tls_handshaking.......: avg=0s       min=0s      med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=391.24µs min=65.47µs med=349.87µs max=7.27ms   p(90)=598.82µs p(95)=695.13µs
+     http_reqs......................: 622670 20755.507071/s
+     iteration_duration.............: avg=471.86µs min=100.4µs med=433.54µs max=7.73ms   p(90)=694.38µs p(95)=796.49µs
+     iterations.....................: 622670 20755.507071/s
+     vus............................: 10     min=10         max=10
+     vus_max........................: 10     min=10         max=10
+
+running (0m30.0s), 00/10 VUs, 622670 complete and 0 interrupted iterations
+```
+
+## Alpine Image
+
+Imagesize: 14,6 MB
+CPU: max 230%
+Mem: 8 MB
+
+```
+  scenarios: (100.00%) 1 scenario, 10 max VUs, 1m0s max duration (incl. graceful stop):
+           * default: 10 looping VUs for 30s (gracefulStop: 30s)
+
+
+     data_received..................: 811 MB 27 MB/s
+     data_sent......................: 60 MB  2.0 MB/s
+     http_req_blocked...............: avg=2.1µs    min=669ns    med=2.09µs   max=2.14ms   p(90)=2.68µs   p(95)=2.87µs
+     http_req_connecting............: avg=2ns      min=0s       med=0s       max=320.34µs p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=411.62µs min=82.07µs  med=367.05µs max=36.16ms  p(90)=623.82µs p(95)=724.43µs
+       { expected_response:true }...: avg=411.62µs min=82.07µs  med=367.05µs max=36.16ms  p(90)=623.82µs p(95)=724.43µs
+     http_req_failed................: 0.00%  ✓ 0            ✗ 644713
+     http_req_receiving.............: avg=24.71µs  min=6.58µs   med=23.16µs  max=7.62ms   p(90)=32.67µs  p(95)=37.33µs
+     http_req_sending...............: avg=8.84µs   min=2.95µs   med=8.94µs   max=3.83ms   p(90)=11.13µs  p(95)=11.8µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=378.06µs min=65.42µs  med=333.86µs max=36.08ms  p(90)=582.7µs  p(95)=680.53µs
+     http_reqs......................: 644713 21490.137303/s
+     iteration_duration.............: avg=455.72µs min=108.97µs med=412.08µs max=36.57ms  p(90)=677.74µs p(95)=781.11µs
+     iterations.....................: 644713 21490.137303/s
+     vus............................: 10     min=10         max=10
+     vus_max........................: 10     min=10         max=10
+
+
+running (0m30.0s), 00/10 VUs, 644713 complete and 0 interrupted iterations
+```
+
 # Dotnet
 
 ## mcr.microsoft.com/dotnet/aspnet:8.0
 
 Imagesize: 225 MB
 CPU: max 210%
-Mem: 92 MB
+Mem: 94 MB
 
 ```
   scenarios: (100.00%) 1 scenario, 10 max VUs, 1m0s max duration (incl. graceful stop):
@@ -40,9 +119,9 @@ running (0m30.0s), 00/10 VUs, 694299 complete and 0 interrupted iterations
 
 ## Alpine Image
 
-Imagesize: MB
+Imagesize: 147 MB
 CPU: max 110%
-Mem: 147 MB
+Mem: 50 MB
 
 ```
   scenarios: (100.00%) 1 scenario, 10 max VUs, 1m0s max duration (incl. graceful stop):
@@ -74,7 +153,7 @@ running (0m30.0s), 00/10 VUs, 173073 complete and 0 interrupted iterations
 
 Imagesize: 211 MB
 CPU: max 110%
-Mem: 51 MB
+Mem: 68 MB
 
 ```
   scenarios: (100.00%) 1 scenario, 10 max VUs, 1m0s max duration (incl. graceful stop):

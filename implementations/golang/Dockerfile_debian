@@ -1,16 +1,16 @@
-FROM rust:latest as build
+FROM golang:1.21 AS build
 
 WORKDIR /usr/src/app
 
 COPY . .
 
-RUN cargo build --release
+RUN CGO_ENABLED=0 GOOS=linux go build
 
 FROM debian:bookworm-slim
 
 WORKDIR /usr/src/app
 
-COPY --from=build /usr/src/app/target/release/fibonacci .
+COPY --from=build /usr/src/app/fibonacci .
 
 EXPOSE 5000
 
