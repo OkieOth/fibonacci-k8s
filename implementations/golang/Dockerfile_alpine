@@ -1,0 +1,17 @@
+FROM golang:1.21 AS build
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN CGO_ENABLED=0 GOOS=linux go build
+
+FROM alpine:latest
+
+WORKDIR /usr/src/app
+
+COPY --from=build /usr/src/app/fibonacci .
+
+EXPOSE 5000
+
+CMD ["./fibonacci"]
