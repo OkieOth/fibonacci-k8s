@@ -2,16 +2,20 @@
 
 k6 requests for 30"
 
-| Language       | Image      | Size   | Mem    | CPU   | Iterations |
-| -------------- | ---------- | ------ | ------ | ----- | ---------- |
-| Quarkus native | minimal    | 78 MB  | 25 MB  | 310 % | 561190     |
-| c#             | asp.net8.0 | 225 MB | 94 MB  | 210 % | 694299     |
-| Node           | Apline     | 147 MB | 50 MB  | 110 % | 173073     |
-|                | Debian     | 211 MB | 68 MB  | 110%  | 178769     |
-| Golang         | Apline     | 15 MB  | 8 MB   | 240 % | 644713     |
-|                | Debian     | 82 MB  | 8.5 MB | 240 % | 622670     |
 
-
+| Language       | Image      | Size   | Mem      | CPU   | Iterations |
+| -------------- | ---------- | ------ | -------- | ----- | ---------- |
+| Python         | Alpine     |  89 MB |  21 MB   | 110 % |  24919     |
+|                | Debian     | 167 MB |  27 MB   | 120 % |  30088     |
+| Dotnet         | asp.net8.0 | 225 MB |  94 MB   | 210 % | 694299     |
+| Node           | Alpine     | 147 MB |  50 MB   | 110 % | 173073     |
+|                | Debian     | 211 MB |  68 MB   | 110 % | 178769     |
+| Golang         | Alpine     |  15 MB |   8 MB   | 240 % | 644713     |
+|                | Debian     |  82 MB |   8.5 MB | 240 % | 622670     |
+| Quarkus native | minimal    |  78 MB |  25 MB   | 310 % | 561190     |
+| Spring Boot 3  | default    | 109 MB | 115 MB   | 400 % | 398724     |
+| Rust           | Alpine     |  20 MB |   1.5 MB | 270 % | 557046     |
+|                | Debian     |  83 MB |   2.2 MB | 142 % | 845817     |
 
 
 # Golang
@@ -381,3 +385,36 @@ Mem: 2.2 MB
      vus_max........................: 10     min=10         max=10
 ```
 
+# Java Spring Boot 3
+
+## Default Image
+
+Imagesize:
+CPU: 400%
+Mem: 115 MB
+
+```
+  scenarios: (100.00%) 1 scenario, 10 max VUs, 1m0s max duration (incl. graceful stop):
+           * default: 10 looping VUs for 30s (gracefulStop: 30s)
+
+
+     data_received..................: 487 MB 16 MB/s
+     data_sent......................: 37 MB  1.2 MB/s
+     http_req_blocked...............: avg=2.02µs   min=803ns    med=1.83µs   max=4.75ms   p(90)=2.23µs   p(95)=2.48µs
+     http_req_connecting............: avg=7ns      min=0s       med=0s       max=518.88µs p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=700.7µs  min=294.4µs  med=625.02µs max=22.24ms  p(90)=889.82µs p(95)=1.05ms
+       { expected_response:true }...: avg=700.7µs  min=294.4µs  med=625.02µs max=22.24ms  p(90)=889.82µs p(95)=1.05ms
+     http_req_failed................: 0.00%  ✓ 0            ✗ 398724
+     http_req_receiving.............: avg=23.27µs  min=9.43µs   med=21.08µs  max=5.57ms   p(90)=27.87µs  p(95)=31.53µs
+     http_req_sending...............: avg=8.41µs   min=3.76µs   med=7.67µs   max=2.09ms   p(90)=9.17µs   p(95)=10.08µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=669.01µs min=266.91µs med=594.35µs max=21.73ms  p(90)=856.03µs p(95)=1.01ms
+     http_reqs......................: 398724 13290.361877/s
+     iteration_duration.............: avg=743.09µs min=321.28µs med=666.53µs max=22.73ms  p(90)=934.27µs p(95)=1.1ms
+     iterations.....................: 398724 13290.361877/s
+     vus............................: 10     min=10         max=10
+     vus_max........................: 10     min=10         max=10
+
+
+running (0m30.0s), 00/10 VUs, 398724 complete and 0 interrupted iterations
+```

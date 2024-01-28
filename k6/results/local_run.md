@@ -2,15 +2,17 @@
 
 k6 requests for 30"
 
-| Language         | Runs    | Memory  |
-| ---------------- | ------- | ------- |
-| Python           | 39736   | 19 MB   |
-| Dotnet           | 1026353 | 80 MB   |
-| Node             | 146636  | 12 MB   |
-| Quarkus          | 1000729 | 500 MB? |
-| Quarkus (native) | 720283  | 27 MB   |
-| Golang           | 1014867 | 5 MB    |
-| Rust             | 1404050 | 790 kB  |
+| Language                    | Iterations | Memory |
+| --------------------------- | ---------- | ------ |
+| Python                      |     39736  |  19 MB |
+| Dotnet                      |   1026353  |  80 MB |
+| Node                        |    146636  |  12 MB |
+| Java Quarkus                |   1000729  | 500 MB |
+| Java Quarkus (native)       |    720283  |  27 MB |
+| Java Spring Boot 3          |    733179  | 500 MB |
+| Java Spring Boot 3 (native) |    579121  | 115 MB |
+| Golang                      |   1014867  |   5 MB |
+| Rust                        |   1404050  | 790 kB |
 
 # Python
 ## with normal logging
@@ -234,7 +236,7 @@ running (0m30.0s), 00/10 VUs, 146636 complete and 0 interrupted iterations
 
 # Quarkus
 
-## normal
+## JVM
 Memory consumption: 500 MB? ... (it opened 3 prozesses)
 
 ```
@@ -285,4 +287,66 @@ Memory consumption: 27.7 MB
      iterations.....................: 720283 24009.061017/s
      vus............................: 10     min=10         max=10
      vus_max........................: 10     min=10         max=10
+```
+
+# Spring Boot 3
+
+## JVM
+
+Mem: 515 MB
+
+```
+  scenarios: (100.00%) 1 scenario, 10 max VUs, 1m0s max duration (incl. graceful stop):
+           * default: 10 looping VUs for 30s (gracefulStop: 30s)
+
+
+     data_received..................: 895 MB 30 MB/s
+     data_sent......................: 68 MB  2.3 MB/s
+     http_req_blocked...............: avg=1.93µs   min=812ns    med=1.69µs   max=1.93ms   p(90)=2.08µs   p(95)=2.29µs
+     http_req_connecting............: avg=1ns      min=0s       med=0s       max=300.32µs p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=359.61µs min=138.24µs med=320.73µs max=16.91ms  p(90)=500.53µs p(95)=586.85µs
+       { expected_response:true }...: avg=359.61µs min=138.24µs med=320.73µs max=16.91ms  p(90)=500.53µs p(95)=586.85µs
+     http_req_failed................: 0.00%  ✓ 0            ✗ 733179
+     http_req_receiving.............: avg=21.9µs   min=8.6µs    med=19.08µs  max=8.05ms   p(90)=24.1µs   p(95)=27.67µs
+     http_req_sending...............: avg=8.24µs   min=3.61µs   med=7.14µs   max=10.47ms  p(90)=8.47µs   p(95)=9.17µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=329.46µs min=116.07µs med=291.92µs max=16.88ms  p(90)=467.77µs p(95)=550.54µs
+     http_reqs......................: 733179 24438.921857/s
+     iteration_duration.............: avg=400.27µs min=164.64µs med=360.13µs max=16.96ms  p(90)=545.02µs p(95)=634.19µs
+     iterations.....................: 733179 24438.921857/s
+     vus............................: 10     min=10         max=10
+     vus_max........................: 10     min=10         max=10
+
+
+running (0m30.0s), 00/10 VUs, 733179 complete and 0 interrupted iterations
+```
+
+## native
+
+Mem: 115 MB
+
+```
+  scenarios: (100.00%) 1 scenario, 10 max VUs, 1m0s max duration (incl. graceful stop):
+           * default: 10 looping VUs for 30s (gracefulStop: 30s)
+
+
+     data_received..................: 707 MB 24 MB/s
+     data_sent......................: 54 MB  1.8 MB/s
+     http_req_blocked...............: avg=1.89µs   min=853ns    med=1.71µs   max=3.28ms   p(90)=2.05µs   p(95)=2.26µs
+     http_req_connecting............: avg=4ns      min=0s       med=0s       max=475.11µs p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=469.33µs min=184.38µs med=409.14µs max=17.18ms  p(90)=609.58µs p(95)=714.9µs
+       { expected_response:true }...: avg=469.33µs min=184.38µs med=409.14µs max=17.18ms  p(90)=609.58µs p(95)=714.9µs
+     http_req_failed................: 0.00%  ✓ 0            ✗ 579121
+     http_req_receiving.............: avg=21.81µs  min=9.44µs   med=19.63µs  max=5.24ms   p(90)=24.86µs  p(95)=28.01µs
+     http_req_sending...............: avg=8.03µs   min=3.64µs   med=7.27µs   max=3.03ms   p(90)=8.5µs    p(95)=9.18µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=439.48µs min=160.67µs med=380.35µs max=17.15ms  p(90)=577.49µs p(95)=679.97µs
+     http_reqs......................: 579121 19303.666374/s
+     iteration_duration.............: avg=509.33µs min=218.42µs med=448.13µs max=17.26ms  p(90)=652.12µs p(95)=759.53µs
+     iterations.....................: 579121 19303.666374/s
+     vus............................: 10     min=10         max=10
+     vus_max........................: 10     min=10         max=10
+
+
+running (0m30.0s), 00/10 VUs, 579121 complete and 0 interrupted iterations
 ```

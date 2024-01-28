@@ -1,3 +1,7 @@
+# TL;DR;
+1. Install GraalVM
+2. `JAVA_HOME=$HOME/{PATH_TO_GRAALVM} ./buildExecutable.sh`
+
 # Getting Started
 
 ### Reference Documentation
