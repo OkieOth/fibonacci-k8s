@@ -8,6 +8,8 @@ commonn coding languages and puts them into a Kubernetes cluster.
 All tests were executed with k6, 10 parallel consumers over a period
 of 30 seconds.
 
+For the tests a request is used that queries the first 100 Fibonacci numbers.
+
 (Not that reliable :D)
 
 
