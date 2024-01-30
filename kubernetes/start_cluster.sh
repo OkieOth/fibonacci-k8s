@@ -6,7 +6,7 @@ COMPOSE_FILE=$scriptPos/../compose_env.yaml
 
 function create() {
   echo "Starting fresh kind cluster ..."
-  k3d cluster create k3d.fibo --agents 1
+  k3d cluster create k3d.fibo --agents 1 -p "5000:5000@loadbalancer"
 }
 
 function delete() {
