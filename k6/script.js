@@ -56,6 +56,6 @@ export const options = {
 // about authoring k6 scripts.
 //
 export default function() {
-  http.get('http://localhost:5000/fibonacci/100');
+  http.get('http://172.31.0.3:5000/fibonacci/100');
   //sleep(1);
 }
